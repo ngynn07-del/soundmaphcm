@@ -23,21 +23,21 @@
       display: block;
     }
 
-.icon {
-  position: absolute;
-  width: 6%;        /* icon co theo bản đồ */
-  height: auto;
-  transform: translate(-50%, -50%);
-  cursor: pointer;
-  transition: transform 0.25s ease;
-}
+    .icon {
+      position: absolute;
+      width: 6%;
+      height: auto;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      transition: transform 0.25s ease;
+    }
 
-/* Nếu màn hình rất nhỏ (<480px), icon nhỏ thêm để đẹp hơn */
-@media (max-width: 480px) {
-  .icon {
-    width: 5%;
-  }
-}
+    /* Nếu màn hình rất nhỏ (<480px), icon nhỏ thêm */
+    @media (max-width: 480px) {
+      .icon {
+        width: 5%;
+      }
+    }
 
     /* Hiệu ứng phồng khi click */
     .icon.clicked {
@@ -72,7 +72,7 @@
       height: auto;
       border-radius: 8px;
       margin-bottom: 8px;
-       }
+    }
 
     .info-box strong {
       font-size: 15px;
@@ -114,7 +114,12 @@
       animation: spark 0.6s ease-out forwards;
     }
 
-/* Popup nhỏ hơn trên điện thoại */
+    @keyframes spark {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(2.5) translateY(-20px); opacity: 0; }
+    }
+
+    /* Popup nhỏ hơn trên điện thoại */
     @media (max-width: 480px) {
       .info-box {
         max-width: 200px;
@@ -172,6 +177,8 @@
 
     icons.forEach(icon => {
       icon.addEventListener('click', (e) => {
+        e.stopPropagation(); // tránh bấm ngoài đóng ngay
+
         // Hiệu ứng icon phồng
         icon.classList.add('clicked');
         setTimeout(() => icon.classList.remove('clicked'), 300);
@@ -211,9 +218,14 @@
         infoBox.style.display = 'block';
 
         // Tính vị trí popup
-        const boxWidth = 300;
+        const boxWidth = window.innerWidth <= 480 ? 200 : 300; // box nhỏ trên mobile
         const leftSpace = rect.left - mapRect.left;
         const rightSpace = mapRect.right - rect.right;
+        let top = rect.top - mapRect.top - 10;
+
+        // Giữ popup trong màn hình theo chiều dọc
+        if (top < 5) top = 5;
+        if (top + boxWidth > window.innerHeight) top = window.innerHeight - boxWidth - 5;
 
         if (rightSpace > boxWidth) {
           infoBox.className = 'info-box right';
@@ -223,7 +235,7 @@
           infoBox.style.left = (rect.left - mapRect.left - boxWidth - 10) + 'px';
         }
 
-        infoBox.style.top = (rect.top - mapRect.top - 10) + 'px';
+        infoBox.style.top = top + 'px';
       });
     });
 
