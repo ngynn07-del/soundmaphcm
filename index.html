@@ -114,9 +114,25 @@
       animation: spark 0.6s ease-out forwards;
     }
 
-    @keyframes spark {
-      0% { transform: scale(1); opacity: 1; }
-      100% { transform: scale(2.5) translateY(-20px); opacity: 0; }
+/* Popup nhỏ hơn trên điện thoại */
+    @media (max-width: 480px) {
+      .info-box {
+        max-width: 200px;
+        font-size: 12px;
+        padding: 8px 12px;
+      }
+
+      .info-box strong {
+        font-size: 13px;
+      }
+
+      .info-box::after {
+        border-width: 6px 8px 6px 0;
+      }
+
+      .info-box.left::after {
+        border-width: 6px 0 6px 8px;
+      }
     }
   </style>
 </head>
