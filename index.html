@@ -23,14 +23,21 @@
       display: block;
     }
 
-    .icon {
-      position: absolute;
-      width: 100px;
-      height: 90px;
-      transform: translate(-50%, -50%);
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
+.icon {
+  position: absolute;
+  width: 6%;        /* icon co theo bản đồ */
+  height: auto;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+/* Nếu màn hình rất nhỏ (<480px), icon nhỏ thêm để đẹp hơn */
+@media (max-width: 480px) {
+  .icon {
+    width: 5%;
+  }
+}
 
     /* Hiệu ứng phồng khi click */
     .icon.clicked {
