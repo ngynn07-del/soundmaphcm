@@ -1,0 +1,50 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #fff;
+}
+
+.map-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.map {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.icon {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+/* Popup */
+.info-box {
+  position: absolute;
+  max-width: 250px;
+  background: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  display: none;
+  z-index: 10;
+}
+
+.info-box img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.info-box strong {
+  display: block;
+  margin-bottom: 5px;
+}
